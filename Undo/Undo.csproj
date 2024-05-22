@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{932D4C72-3952-4E18-8343-2FE775C0D413}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Undo</RootNamespace>
+        <AssemblyName>Undo</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\Shared\HarmonyMod.cs" />
+        <Compile Include="..\Shared\Logger.cs" />
+        <Compile Include="..\Shared\ParkitectMod.cs" />
+        <Compile Include="Constants.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="UndoActivationBehaviour.cs" />
+        <Compile Include="UndoMod.cs" />
+        <Compile Include="UndoStateManagerSingleton.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="0Harmony, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+        <HintPath>..\packages\Lib.Harmony.2.3.3\lib\net472\0Harmony.dll</HintPath>
+      </Reference>
+      <Reference Include="Accessibility">
+        <HintPath>..\Vendored\453090_14290343\Accessibility.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="com.rlabrecque.steamworks.net">
+        <HintPath>..\Vendored\453090_14290343\com.rlabrecque.steamworks.net.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="DOTween">
+        <HintPath>..\Vendored\453090_14290343\DOTween.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="DOTween43">
+        <HintPath>..\Vendored\453090_14290343\DOTween43.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="DOTween46">
+        <HintPath>..\Vendored\453090_14290343\DOTween46.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="DOTween50">
+        <HintPath>..\Vendored\453090_14290343\DOTween50.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="GalaxyCSharp">
+        <HintPath>..\Vendored\453090_14290343\GalaxyCSharp.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ICSharpCode.SharpZipLib">
+        <HintPath>..\Vendored\453090_14290343\ICSharpCode.SharpZipLib.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Ionic.Zip.Unity">
+        <HintPath>..\Vendored\453090_14290343\Ionic.Zip.Unity.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="modio.UnityPlugin">
+        <HintPath>..\Vendored\453090_14290343\modio.UnityPlugin.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Mono.Security">
+        <HintPath>..\Vendored\453090_14290343\Mono.Security.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="mscorlib">
+        <HintPath>..\Vendored\453090_14290343\mscorlib.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="netstandard">
+        <HintPath>..\Vendored\453090_14290343\netstandard.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Newtonsoft.Json">
+        <HintPath>..\Vendored\453090_14290343\Newtonsoft.Json.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Parkitect">
+        <HintPath>..\Vendored\453090_14290343\Parkitect.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Photon3Unity3D">
+        <HintPath>..\Vendored\453090_14290343\Photon3Unity3D.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="protobuf-net">
+        <HintPath>..\Vendored\453090_14290343\protobuf-net.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System">
+        <HintPath>..\Vendored\453090_14290343\System.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.ComponentModel.Composition">
+        <HintPath>..\Vendored\453090_14290343\System.ComponentModel.Composition.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.ComponentModel.DataAnnotations">
+        <HintPath>..\Vendored\453090_14290343\System.ComponentModel.DataAnnotations.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Configuration">
+        <HintPath>..\Vendored\453090_14290343\System.Configuration.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Configuration.Install">
+        <HintPath>..\Vendored\453090_14290343\System.Configuration.Install.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Core">
+        <HintPath>..\Vendored\453090_14290343\System.Core.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Data">
+        <HintPath>..\Vendored\453090_14290343\System.Data.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Diagnostics.StackTrace">
+        <HintPath>..\Vendored\453090_14290343\System.Diagnostics.StackTrace.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Drawing">
+        <HintPath>..\Vendored\453090_14290343\System.Drawing.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.EnterpriseServices">
+        <HintPath>..\Vendored\453090_14290343\System.EnterpriseServices.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Globalization.Extensions">
+        <HintPath>..\Vendored\453090_14290343\System.Globalization.Extensions.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.IdentityModel">
+        <HintPath>..\Vendored\453090_14290343\System.IdentityModel.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.IdentityModel.Selectors">
+        <HintPath>..\Vendored\453090_14290343\System.IdentityModel.Selectors.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.IO.Compression">
+        <HintPath>..\Vendored\453090_14290343\System.IO.Compression.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.IO.Compression.FileSystem">
+        <HintPath>..\Vendored\453090_14290343\System.IO.Compression.FileSystem.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Messaging">
+        <HintPath>..\Vendored\453090_14290343\System.Messaging.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Net.Http">
+        <HintPath>..\Vendored\453090_14290343\System.Net.Http.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Numerics">
+        <HintPath>..\Vendored\453090_14290343\System.Numerics.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Runtime.DurableInstancing">
+        <HintPath>..\Vendored\453090_14290343\System.Runtime.DurableInstancing.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Runtime.Serialization">
+        <HintPath>..\Vendored\453090_14290343\System.Runtime.Serialization.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Runtime.Serialization.Xml">
+        <HintPath>..\Vendored\453090_14290343\System.Runtime.Serialization.Xml.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.ServiceModel">
+        <HintPath>..\Vendored\453090_14290343\System.ServiceModel.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.ServiceModel.Discovery">
+        <HintPath>..\Vendored\453090_14290343\System.ServiceModel.Discovery.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.ServiceModel.Internals">
+        <HintPath>..\Vendored\453090_14290343\System.ServiceModel.Internals.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Transactions">
+        <HintPath>..\Vendored\453090_14290343\System.Transactions.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Web">
+        <HintPath>..\Vendored\453090_14290343\System.Web.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Web.ApplicationServices">
+        <HintPath>..\Vendored\453090_14290343\System.Web.ApplicationServices.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Web.Services">
+        <HintPath>..\Vendored\453090_14290343\System.Web.Services.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Windows.Forms">
+        <HintPath>..\Vendored\453090_14290343\System.Windows.Forms.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Xaml">
+        <HintPath>..\Vendored\453090_14290343\System.Xaml.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Xml">
+        <HintPath>..\Vendored\453090_14290343\System.Xml.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Xml.Linq">
+        <HintPath>..\Vendored\453090_14290343\System.Xml.Linq.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="System.Xml.XPath.XDocument">
+        <HintPath>..\Vendored\453090_14290343\System.Xml.XPath.XDocument.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.DynamicDecals">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.DynamicDecals.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.GraphMaker">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.GraphMaker.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.Lutify">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.Lutify.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.ScreenSpaceCloudShadow">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.ScreenSpaceCloudShadow.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.TiltShift">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.TiltShift.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="ThirdParty.UnityUiExtensions">
+        <HintPath>..\Vendored\453090_14290343\ThirdParty.UnityUiExtensions.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>..\Vendored\453090_14290343\Unity.Analytics.DataPrivacy.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.Formats.Fbx.Runtime">
+        <HintPath>..\Vendored\453090_14290343\Unity.Formats.Fbx.Runtime.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.Mathematics">
+        <HintPath>..\Vendored\453090_14290343\Unity.Mathematics.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.MemoryProfiler">
+        <HintPath>..\Vendored\453090_14290343\Unity.MemoryProfiler.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.Postprocessing.Runtime">
+        <HintPath>..\Vendored\453090_14290343\Unity.Postprocessing.Runtime.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.TextMeshPro">
+        <HintPath>..\Vendored\453090_14290343\Unity.TextMeshPro.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="Unity.Timeline">
+        <HintPath>..\Vendored\453090_14290343\Unity.Timeline.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AccessibilityModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AccessibilityModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AIModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AIModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AndroidJNIModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AndroidJNIModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AnimationModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AnimationModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ARModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ARModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AssetBundleModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AssetBundleModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AudioModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.AudioModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ClothModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ClothModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ClusterInputModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ClusterInputModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ClusterRendererModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ClusterRendererModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.CoreModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.CoreModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.CrashLog">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.CrashLog.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.CrashReportingModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.CrashReportingModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.DirectorModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.DirectorModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.DSPGraphModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.DSPGraphModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.GameCenterModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.GameCenterModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.GIModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.GIModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.GridModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.GridModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.HotReloadModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.HotReloadModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ImageConversionModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ImageConversionModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.IMGUIModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.IMGUIModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.InputLegacyModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.InputLegacyModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.InputModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.InputModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.JSONSerializeModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.JSONSerializeModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.LocalizationModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.LocalizationModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ParticleSystemModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ParticleSystemModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.PerformanceReportingModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.PerformanceReportingModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.Physics2DModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.Physics2DModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.PhysicsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.PhysicsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ProfilerModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ProfilerModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.ScreenCaptureModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.SharedInternalsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.SharedInternalsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.SpriteMaskModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.SpriteMaskModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.SpriteShapeModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.SpriteShapeModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.StreamingModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.StreamingModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.SubstanceModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.SubstanceModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.SubsystemsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.SubsystemsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TerrainModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TerrainModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TerrainPhysicsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TextCoreModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TextCoreModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TextRenderingModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TextRenderingModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TilemapModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TilemapModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.TLSModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.TLSModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UI">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UI.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UIElementsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UIElementsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UIElementsNativeModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UIElementsNativeModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UIModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UIModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UmbraModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UmbraModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UNETModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UNETModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityAnalyticsModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityConnectModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityConnectModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityCurlModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityCurlModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityTestProtocolModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.VehiclesModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.VehiclesModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.VFXModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.VFXModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.VideoModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.VideoModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.VirtualTexturingModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.VirtualTexturingModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.VRModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.VRModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.WindModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.WindModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+      <Reference Include="UnityEngine.XRModule">
+        <HintPath>..\Vendored\453090_14290343\UnityEngine.XRModule.dll</HintPath>
+        <Private>false</Private>
+      </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
